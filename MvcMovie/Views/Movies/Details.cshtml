@@ -1,0 +1,108 @@
+﻿@model Tuple<Movie, Review>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(tuple => tuple.Item1.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(tuple => tuple.Item1.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(tuple => tuple.Item1.ReleaseDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayNameFor(tuple => tuple.Item1.ReleaseDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(tuple => tuple.Item1.Genre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(tuple => tuple.Item1.Genre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(tuple => tuple.Item1.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(tuple => tuple.Item1.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(tuple => tuple.Item1.Rating)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(tuple => tuple.Item1.Rating)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Item1.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Review
+            </th>
+            <th>
+                Review Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Item1.Reviews)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReviewDate)
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Movies" asp-action="CreateReview">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Item2.MovieId" value="@ViewData["MovieId"]" />
+            <div class="form-group">
+                <label asp-for="Item2.Name" class="control-label"></label>
+                <input asp-for="Item2.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Item2.Content" class="control-label"></label>
+                <textarea asp-for="Item2.Content" class="form-control" rows="6" ></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
